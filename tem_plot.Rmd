@@ -1,0 +1,37 @@
+---
+title: "tem_plot"
+author: "Tong_Li"
+date: "2021/10/27"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Temp analysis
+
+
+```{r_temp_analysis}
+library(sf)
+library(here)
+library(janitor)
+library(tidyverse)
+library(raster)
+library(ggplot2)
+library(stringr)
+
+UKoutline <- st_read(here("Raw_Data", "gadm36_GBR_0.shp")) 
+print(UKoutline)
+
+worldcities <- st_read(here("Raw_Data","World_Cities.shp"))
+                       
+print(worldcities)
+
+UKcities <- worldcities %>%
+  clean_names()%>%
+  filter(cntry_name== "United Kingdom")
+print(ukcities)
+
+plot(UKoutline$geom)
+
