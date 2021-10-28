@@ -26,11 +26,10 @@ worldData_10_19<- worldData %>%
   dplyr::select(contains("HDI.Rank"), 
                 contains("Country"),
                 contains("2010"),
-                contains("2019"),
-                contains("df")) 
+                contains("2019")) 
 
 
-# worldData_10_19$df <- as.numeric(worldData_10_19$X2010) - as.numeric(worldData_10_19$X2019)  
+worldData_10_19$df <- as.numeric(worldData_10_19$X2010) - as.numeric(worldData_10_19$X2019)  
 
 worldmap$COUNTRYAFF <- countrycode(worldmap$COUNTRYAFF, origin = "country.name", destination = "iso3c")
 
@@ -50,7 +49,7 @@ tmap_mode("plot")
 Worlddf %>%
   qtm(.,fill = "df")
 
-# no title shows, why？?
+# no title shows, why
 tm_layout(legend.position = c("left", "bottom"), 
           title= 'global gender inequality', 
           title.position = c('left', 'top'))
