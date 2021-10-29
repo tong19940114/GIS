@@ -22,6 +22,7 @@ library(tmap)
 library(tmaptools)
 library(rgdal)
 library(geojsonio)
+library(countrycode)
 
 ```
 
