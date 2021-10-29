@@ -12,6 +12,7 @@ library(tmap)
 library(tmaptools)
 library(rgdal)
 library(geojsonio)
+library(countrycode)
 
 worldmap <- st_read(here("Raw_Data",
              "World_Countries_(Generalized)",
@@ -36,12 +37,14 @@ worldmap$COUNTRYAFF <- countrycode(worldmap$COUNTRYAFF, origin = "country.name",
 worldData_10_19$cowcodes <- worldData_10_19$Country
 worldData_10_19$cowcodes <- countrycode(worldData_10_19$Country , origin = "country.name", destination = "iso3c")
 
-
-
+worldmap$COUNTRYAFF <- countrycode(worldmap$COUNTRYAFF, origin = "country.name", destination = "iso3c")
+worldData_10_19$cowcodes <- worldData_10_19$Country
+worldData_10_19$cowcodes <- countrycode(worldData_10_19$Country , origin = "country.name", destination = "iso3c")
 Worlddf <- worldmap %>% 
-left_join(., 
-          worldData_10_19,
-          by = c("COUNTRYAFF" = "cowcodes"))
+  left_join(., 
+            worldData_10_19,
+            by = c("COUNTRYAFF" = "cowcodes"))
+
 
 
 library(tmap)
